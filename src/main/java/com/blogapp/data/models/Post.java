@@ -6,6 +6,8 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Entity(name = "blog_post")
@@ -35,11 +37,18 @@ public class Post {
     @UpdateTimestamp
     private LocalDate dateModified;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Comment> comments;
 
 
+    public void addComment(Comment... comment){
+        if(comments == null){
+            this.comments = new ArrayList<>();
+        }
 
+        comments.addAll(Arrays.asList(comment));
+
+    }
 
 
 }
