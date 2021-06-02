@@ -3,6 +3,7 @@ package com.blogapp.service.post;
 import com.blogapp.data.models.Post;
 import com.blogapp.data.repository.PostRepository;
 import com.blogapp.web.controllers.dto.PostDto;
+import com.blogapp.web.exceptions.PostObjectIsNullException;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -31,7 +32,7 @@ class PostServiceImplTest {
     }
 
     @Test
-    void whenTheSaveMethodIsCalled_thenRepositoryCalledOnceTest(){
+    void whenTheSaveMethodIsCalled_thenRepositoryCalledOnceTest() throws PostObjectIsNullException {
 
         when(postServiceImpl.savePost(new PostDto())).thenReturn(testPost);
         postServiceImpl.savePost(new PostDto());
