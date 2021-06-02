@@ -12,6 +12,9 @@ import org.mockito.Mock;
 import static org.mockito.Mockito.*;
 import org.mockito.MockitoAnnotations;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class PostServiceImplTest {
@@ -28,7 +31,7 @@ class PostServiceImplTest {
     void setUp() {
 
         MockitoAnnotations.openMocks(this);
-        testPost= new Post();
+        testPost = new Post();
     }
 
     @Test
@@ -40,4 +43,12 @@ class PostServiceImplTest {
         verify(postRepository, times(1)).save(testPost);
     }
 
+    @Test
+    void whenTheFindMethodIsCalled_thenReturnAListOfPost() {
+        List<Post> postList = new ArrayList<>();
+            when(postServiceImpl.findAllPost()).thenReturn(postList);
+            postServiceImpl.findAllPost();
+
+            verify(postRepository, times(1)).findAll();
+    }
 }
